@@ -55,3 +55,44 @@ test.py: sys.argv = ['./test.py', 'a', 'b', 'c', 'd']
 test.py: A = 1
 test.py: B = 2
 ```
+
+## options
+
+currently, envi does not support options
+
+supporting options is non-trivial
+
+* we need a way to diff between
+  * envi options string (`-a 1 -b 2`)
+  * script path (`./test.py`)
+* we need to parse the options string (`-a 1 -b 2`)
+  * related: `-S` option of `env`
+
+### no options
+
+`#!./envi`
+
+```
+envi: argv:
+envi: $0 = ./envi
+envi: $1 = ./test.py
+envi: $2 = a
+envi: $3 = b
+envi: $4 = c
+envi: $5 = d
+```
+
+### with options
+
+`#!./envi -a 1 -b 2`
+
+```
+envi: argv:
+envi: $0 = ./envi
+envi: $1 = -a 1 -b 2
+envi: $2 = ./test.py
+envi: $3 = a
+envi: $4 = b
+envi: $5 = c
+envi: $6 = d
+```
